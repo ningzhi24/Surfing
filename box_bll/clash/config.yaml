@@ -50,7 +50,7 @@ All: &All
 proxy-providers: # ← 此函数位置请勿变动！此为模块更新时备份恢复订阅变量范围 ↓
   1.主要地址:
     <<: *p
-    url: "引入您的Clash订阅链接地址"
+    url: "https://45.137.181.206/api/v1/client/subscribe?token=2930524bfb1ce8788d43156d588fb0c0"
     
   2.备用地址:
     <<: *p
@@ -157,6 +157,8 @@ proxy_groups: &proxy_groups
       - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
       - 🇺🇲 美国节点
+      - 🇰🇷 韓國节点
+      - 💎 专线节点
       - 🌍 其它地区
       - 🌎 全球直连
     <<: *A
@@ -173,13 +175,21 @@ proxy-groups:
       - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
       - 🇺🇲 美国节点
+      - 🇰🇷 韓國节点
+      - 💎 专线节点
       - 🌍 其它地区
       - 🌎 全球直连
 # —————————
 
   - name: ♻️ 延迟最低
     type: url-test
-    <<: *A
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韓國节点
 
   - name: ♻️ 故障转移
     type: fallback
@@ -237,28 +247,36 @@ proxy-groups:
   - name: 🐋 漏网之鱼
     <<: *proxy_groups
 
+  - name: 💎 专线节点
+    filter: "^(?=.*(专线|HOME)).*$"
+    <<: *All
+
   - name: 🇭🇰 香港节点
-    filter: "^(?=.*(港|HK|hk|Hong Kong|HongKong|hongkong)).*$"
+    filter: "^(?=.*(港|HK|hk|Hong Kong|HongKong|hongkong))^(?!.*(专线|HOME)).*$"
     <<: *All
 
   - name: 🇯🇵 日本节点
-    filter: "^(?=.*(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan)).*$"
+    filter: "^(?=.*(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan))^(?!.*(专线|HOME)).*$"
     <<: *All
 
   - name: 🇺🇲 美国节点
-    filter: "^(?=.*(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)).*$"
+    filter: "^(?=.*(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States))^(?!.*(专线|HOME)).*$"
     <<: *All
 
   - name: 🇨🇳 台湾节点
-    filter: "^(?=.*(台|新北|彰化|TW|Taiwan)).*$"
+    filter: "^(?=.*(台|新北|彰化|TW|Taiwan))^(?!.*(专线|HOME)).*$"
     <<: *All
 
   - name: 🇸🇬 狮城节点
-    filter: "^(?=.*(新加坡|坡|狮城|SG|Singapore)).*$"
+    filter: "^(?=.*(新加坡|坡|狮城|SG|Singapore))^(?!.*(专线|HOME)).*$"
     <<: *All
 
+  - name: 🇰🇷 韓國节点
+    filter: "^(?=.*(韓國))^(?!.*(专线|HOME)).*$"
+    <<: *All
+    
   - name: 🌍 其它地区
-    filter: "^(?!.*(港|HK|hk|Hong Kong|HongKong|hongkong|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|台|新北|彰化|TW|Taiwan|新加坡|坡|狮城|SG|Singapore|灾|网易|Netease|套餐|重置|剩余|到期|订阅|群|账户|流量|有效期|时间|官网)).*$"
+    filter: "^(?!.*(港|HK|hk|Hong Kong|HongKong|hongkong|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|台|新北|彰化|TW|Taiwan|新加坡|坡|狮城|SG|Singapore|灾|网易|Netease|套餐|重置|剩余|到期|订阅|群|账户|流量|有效期|时间|官网))^(?!.*(专线|HOME)).*$"
     <<: *All
 # —————————
 
